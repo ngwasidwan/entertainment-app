@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 export const NavigationIcons = function ({
+  title,
   children,
   icon,
   setActiveIcon,
@@ -6,20 +9,26 @@ export const NavigationIcons = function ({
   movies,
   setMovieType,
 }) {
+  const [iconHeading, setIconHeading] = useState("hidden");
   return (
-    <svg
-      className={activeIcon === icon ? "active icon " : "icon"}
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 256 256"
-      onClick={() => {
-        setActiveIcon(icon);
-        setMovieType(movies);
-      }}
-    >
-      {children}
-    </svg>
+    <div className="icon-box">
+      <svg
+        className={activeIcon === icon ? "active icon " : "icon"}
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 256 256"
+        onClick={() => {
+          setActiveIcon(icon);
+          setMovieType(movies);
+        }}
+        onMouseOver={() => setIconHeading("")}
+        onMouseOut={() => setIconHeading("hidden")}
+      >
+        {children}
+      </svg>
+      <p className={`${iconHeading} icon-title`}>{title}</p>
+    </div>
   );
 };
 

@@ -44,6 +44,18 @@ sidebar
   transform: scale(1.2);
   fill: #fff;
 }
+.icon-box {
+  position: relative;
+}
+.icon-title {
+  position: absolute;
+  top: 100%;
+
+  font-size: 0.6rem;
+  background-color: #000000;
+  padding: 0.5px 2px;
+  color: #adadad;
+}
 
 /* 
 //////

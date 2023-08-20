@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useSearch } from "./customHook";
 import { NavigationIcons, FilmIcon, SearchIcon } from "./icon";
 import { data } from "./data";
 import img from "./img/img.jpg";
@@ -29,6 +30,7 @@ const Sidebar = function () {
         <FilmIcon />
 
         <NavigationIcons
+          title="home "
           movies={data}
           setMovieType={setMovieType}
           icon={0}
@@ -39,6 +41,7 @@ const Sidebar = function () {
         </NavigationIcons>
 
         <NavigationIcons
+          title="movies"
           movies={movies}
           setMovieType={setMovieType}
           icon={1}
@@ -49,6 +52,7 @@ const Sidebar = function () {
         </NavigationIcons>
 
         <NavigationIcons
+          title="series"
           movies={series}
           setMovieType={setMovieType}
           icon={2}
@@ -59,6 +63,7 @@ const Sidebar = function () {
         </NavigationIcons>
 
         <NavigationIcons
+          title="bookmarks"
           movies={bookmarkedData}
           setMovieType={setMovieType}
           icon={3}
@@ -89,7 +94,7 @@ const Movie = function ({ movie }) {
 
   return (
     <div className="movie-box">
-      <img src={Poster} alt={Title} className="img" />
+      <img src={Poster} alt={`${Title} Poster`} className="img" />
       <span>{Year}</span>
       <span>{Type}</span>
       <span>18+</span>
@@ -160,22 +165,17 @@ const DisplayMovies = function ({
 };
 
 const SearchBar = function ({ setMovieType, inputVal, setInputVal }) {
-  const activeEl = useRef(null);
-  useEffect(() => {
-    activeEl.current.focus();
-  });
+  const activeEl = useSearch();
 
   const handleInput = function (e) {
-    console.log(e.target.value);
-
     const search = inputVal.toLowerCase();
 
     const searchMovie = data.filter((movie) =>
       movie.Title.toLowerCase().includes(search)
     );
 
-    setMovieType(searchMovie);
     setInputVal(e.target.value);
+    setMovieType(searchMovie);
   };
   return (
     <div className="input">
